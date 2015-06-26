@@ -15,7 +15,8 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var nameTextfield: UITextField!
     
     @IBAction func addButton(sender: AnyObject) {
-        outgoingManager.addOutgoing(nameTextfield.text,desc:descTextfield.text,cost:costTextfield.text,user:userName)
+        let id = createId()
+        outgoingManager.addOutgoing(id,name: nameTextfield.text,desc:descTextfield.text,cost:costTextfield.text,user:userName)
         self.view.endEditing(true)
         costTextfield.text = " "
         descTextfield.text = " "
@@ -26,6 +27,17 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    //给每一个item生成独一无二的10位随机字符串
+    func createId()->String{
+        var id = ""
+        for i in 0...10 {
+            var randomNumber = 65 + arc4random() % 26
+            var randomCharacter = Character( UnicodeScalar(randomNumber))
+            id += String(randomCharacter)
+        }
+        return id
     }
     
     override func viewDidLoad() {

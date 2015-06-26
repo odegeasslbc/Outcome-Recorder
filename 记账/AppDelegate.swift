@@ -24,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //let db = SQLiteDB.sharedInstance()
         //登录已有用户
-
        
         // [Optional] Power your app with Local Datastore. For more info, go to
         // https://parse.com/docs/ios_guide#localdatastore/iOS
@@ -64,6 +63,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerForRemoteNotifications()
         }
         
+        var currentuser:PFUser? = PFUser.currentUser()
+        if currentuser != nil{
+            loginStatus = "yes"
+            userName = currentuser!.username!
+            
+        }
+        println("loginstaus: \(loginStatus), user name : \(userName)")
+        
         return true
     }
     
@@ -95,8 +102,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidEnterBackground(application: UIApplication) {
         //当应用进入后台，自动保存所有项目
-        outgoingManager.saveAll()
-        outgoingManager.saveOnCloud()
+        //outgoingManager.saveAll()
+        //outgoingManager.saveOnCloud()
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
@@ -111,7 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         //当应用关闭，自动保存所有项目
-        outgoingManager.saveAll()
+        //outgoingManager.saveOnCloud()
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 

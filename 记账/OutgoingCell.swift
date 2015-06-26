@@ -14,6 +14,7 @@ class OutgoingCell: UITableViewCell {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var descLabel: UILabel!
     @IBOutlet var costLabel: UILabel!
+    var id:String!
     
     override func awakeFromNib() {
         super.awakeFromNib()

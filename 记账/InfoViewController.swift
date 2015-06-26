@@ -15,24 +15,36 @@ class InfoViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet var emailText: UITextField!
     @IBOutlet var passwordText: UITextField!
     
+    @IBOutlet var logoutBtn: UIButton!
+    @IBOutlet var registerBtn: UIButton!
+    @IBOutlet var loginBtn: UIButton!
+    
+    
     @IBAction func loginButton(sender: AnyObject) {
         self.view.endEditing(true)
         
         let alert = SCLAlertView()
+        //在新用户登录前把当前用户数据保存
+        //outgoingManager.saveOnCloud()
         
         PFUser.logInWithUsernameInBackground(nameText.text, password: passwordText.text){
             (user: PFUser?, error: NSError?) -> Void in
             if user != nil {
                 loginStatus = "yes"
                 userName = user!.username!
-                self.nameLabel.text = user!.username
                 alert.showInfo("成功", subTitle: "登录成功", closeButtonTitle: "好的", duration: 2.0)
+                
+                self.nameLabel.text = userName
+                self.logoutBtn.hidden = false
+                self.registerBtn.hidden = true
+                self.loginBtn.hidden = true
+                
                 outgoingManager.refreshOutgoings()
             } else {
                 // The login failed. Check error to see why.
-                let errorString = error?.description
+                let errorString = error!.userInfo?["error"] as? String
                 // Show the errorString somewhere and let the user try again.
-                alert.showInfo("失败", subTitle: errorString!, closeButtonTitle: "好的", duration: 2.0)
+                alert.showInfo("失败", subTitle: errorString!, closeButtonTitle: "好的")
             }
         }
         
@@ -55,44 +67,62 @@ class InfoViewController: UIViewController,UITextFieldDelegate {
             if let error = error {
                 let errorString = error.userInfo?["error"] as? String
                 // Show the errorString somewhere and let the user try again.
-                alert.showInfo("失败", subTitle: errorString!, closeButtonTitle: "好的", duration: 2.0)
+                alert.showInfo("失败", subTitle: errorString!, closeButtonTitle: "好的")
             } else {
                 alert.addButton("是的，同步我的数据"){
                     PFUser.logInWithUsernameInBackground(user.username!, password: user.password!)
                     userName = user.username!
                     loginStatus = "yes"
-                    outgoingManager.syncToCloud()
+                    outgoingManager.syncToCloudForFirstUser()
                 }
                 alert.showInfo("成功", subTitle: "成功注册新用户！是否同步本地数据到该账户？", closeButtonTitle: "不了。新建空账户")
                 
+                self.logoutBtn.hidden = false
+                self.registerBtn.hidden = true
+                self.loginBtn.hidden = true
+                
+                self.nameLabel.text = userName
+
                 outgoingManager.refreshOutgoings()
             }
         }
         
-        nameLabel.text = user.username
         nameText.text = ""
         passwordText.text = ""
         emailText.text = ""
     }
     
     @IBAction func logoutButton(sender: AnyObject) {
-        PFUser.logOut()
-        userName = "un-usered"
-        loginStatus = "no"
+        
         let alert = SCLAlertView()
-        alert.addButton("清空数据"){
-            let db = SQLiteDB.sharedInstance()
-            db.execute("drop table outgoings")
-            outgoingManager.outgoings.removeAll(keepCapacity: true)
+        alert.addButton("保留数据"){
+            //这会删除上一个本地用户的数据
+            outgoingManager.syncToLocal()
+            PFUser.logOut()
+            userName = "un-usered"
+            loginStatus = "no"
+            
+            self.logoutBtn.hidden = true
+            self.registerBtn.hidden = false
+            self.loginBtn.hidden = false
         }
-        alert.showInfo("您已登出", subTitle: "是否清空本地数据？", closeButtonTitle: "保留数据")
-        outgoingManager.syncToLocal()
+        alert.addButton("清空数据"){
+            userName = "un-usered"
+            loginStatus = "no"
+            PFUser.logOut()
+            outgoingManager.refreshOutgoings()
+            
+            self.logoutBtn.hidden = true
+            self.registerBtn.hidden = false
+            self.loginBtn.hidden = false
+        }
+        alert.showInfo("您将登出", subTitle: "是否清空本地数据？",closeButtonTitle:"取消登出")
+
         
         nameLabel.text = ""
         nameText.text = ""
         passwordText.text = ""
         emailText.text = ""
-        outgoingManager.refreshOutgoings()
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -100,11 +130,21 @@ class InfoViewController: UIViewController,UITextFieldDelegate {
         return true
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
         if PFUser.currentUser() != nil{
             userName = PFUser.currentUser()!.username!
             nameLabel.text = userName
+        }
+        
+        if loginStatus == "no"{
+            logoutBtn.hidden = true
+        }else{
+            loginBtn.hidden = true
+            registerBtn.hidden = true
         }
         // Do any additional setup after loading the view.
     }
