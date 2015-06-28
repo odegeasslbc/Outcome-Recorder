@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>F6AD09B2-1045-496A-91E8-7D94636CFD11</string>
 	<key>IDESourceControlProjectName</key>
-	<string>记账</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>CA90CB7AEB95EC3D6DB88AB4E556CC3EFDA50D8B</key>
 		<string>https://github.com/odegeasslbc/outcome-recorder.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>记账.xcodeproj</string>
+	<string>记账.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>CA90CB7AEB95EC3D6DB88AB4E556CC3EFDA50D8B</key>

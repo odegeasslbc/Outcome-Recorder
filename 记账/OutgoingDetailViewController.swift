@@ -28,6 +28,7 @@ class OutgoingDetailViewController: UIViewController {
     
     @IBOutlet var descLabel: UILabel!
     @IBOutlet var costLabel: UILabel!
+    @IBOutlet var dateLabel: UILabel!
     
     //var delegate: OutgoingDetailViewControllerDelegate?
     //var outgoingInfo:OutgoingInfo!
@@ -48,10 +49,16 @@ class OutgoingDetailViewController: UIViewController {
                 label.text = detail.desc
             }
             if let label = self.costLabel{
-                label.text = detail.cost
+                label.text = String(stringInterpolationSegment: detail.cost)
             }
             if let label = self.nameLabel{
                 label.text = detail.name
+            }
+            if let label = self.dateLabel{
+                var dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                let dateString = dateFormatter.stringFromDate(detail.date)
+                label.text = dateString
             }
         }
     }
@@ -66,11 +73,13 @@ class OutgoingDetailViewController: UIViewController {
         self.configureView()
         self.navigationController?.popViewControllerAnimated(true)
         
+        
         let swipeDownRec = UISwipeGestureRecognizer()
         swipeDownRec.direction = UISwipeGestureRecognizerDirection.Down
         swipeDownRec.addTarget(self,action:"swippedDown")
         self.view.addGestureRecognizer(swipeDownRec)
-
+        
+        println(costLabel.text)
         //self.outgoingInfo = delegate?.getInfo()
         // Do any additional setup after loading the view.
     }

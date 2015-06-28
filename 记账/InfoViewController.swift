@@ -10,6 +10,8 @@ import UIKit
 
 class InfoViewController: UIViewController,UITextFieldDelegate {
 
+    var currentMoney:Double = 1700
+    
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var nameText: UITextField!
     @IBOutlet var emailText: UITextField!
@@ -19,6 +21,10 @@ class InfoViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet var registerBtn: UIButton!
     @IBOutlet var loginBtn: UIButton!
     
+    @IBOutlet var currentMoneyLabel: UILabel!
+    @IBOutlet var totalOutgoingLabel: UILabel!
+    
+    @IBOutlet var loginView: UIView!
     
     @IBAction func loginButton(sender: AnyObject) {
         self.view.endEditing(true)
@@ -40,6 +46,8 @@ class InfoViewController: UIViewController,UITextFieldDelegate {
                 self.loginBtn.hidden = true
                 
                 outgoingManager.refreshOutgoings()
+                
+                self.loginView.hidden = true
             } else {
                 // The login failed. Check error to see why.
                 let errorString = error!.userInfo?["error"] as? String
@@ -84,6 +92,8 @@ class InfoViewController: UIViewController,UITextFieldDelegate {
                 self.nameLabel.text = userName
 
                 outgoingManager.refreshOutgoings()
+                
+                self.loginView.hidden = true
             }
         }
         
@@ -125,16 +135,41 @@ class InfoViewController: UIViewController,UITextFieldDelegate {
         emailText.text = ""
     }
     
+    @IBAction func hideLoginView(sender: AnyObject) {
+        loginView.hidden = true
+    }
+    @IBAction func showLoginView(sender: AnyObject) {
+        loginView.hidden = false
+    }
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
+    func countTotal()->String{
+        var totalCount:Double = 0.0
+        
+        for item in outgoingManager.outgoings{
+            let cost = item.cost
+            totalCount += cost
+        }
+        let tmp:Double = 1700.00
+        currentMoney = tmp - totalCount
+
+        return String(stringInterpolationSegment: totalCount)        
+    }
     
+    func countCurrent(){
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        loginView.layer.cornerRadius = 10
+        loginView.hidden = true
+        
         if PFUser.currentUser() != nil{
             userName = PFUser.currentUser()!.username!
             nameLabel.text = userName
@@ -146,9 +181,16 @@ class InfoViewController: UIViewController,UITextFieldDelegate {
             loginBtn.hidden = true
             registerBtn.hidden = true
         }
-        // Do any additional setup after loading the view.
+        
+        totalOutgoingLabel.text = countTotal()
+        
     }
 
+    override func viewWillAppear(animated: Bool) {
+        totalOutgoingLabel.text = countTotal()
+        currentMoneyLabel.text = String(stringInterpolationSegment: currentMoney)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -169,3 +211,5 @@ class InfoViewController: UIViewController,UITextFieldDelegate {
     */
 
 }
+
+

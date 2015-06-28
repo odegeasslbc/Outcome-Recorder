@@ -31,6 +31,10 @@
 		623016721B3B6B500025E726 /* OutgoingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623016711B3B6B500025E726 /* OutgoingDetailViewController.swift */; };
 		623016E21B3BD41B0025E726 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 623016E11B3BD41B0025E726 /* Main.storyboard */; };
 		623016E31B3BD41B0025E726 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 623016E11B3BD41B0025E726 /* Main.storyboard */; };
+		623016E71B3E06E60025E726 /* XXYNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 623016E61B3E06E60025E726 /* XXYNavigationController.m */; };
+		623016E81B3E06E60025E726 /* XXYNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 623016E61B3E06E60025E726 /* XXYNavigationController.m */; };
+		623016EB1B3E0E710025E726 /* AMScrollingNavbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 623016EA1B3E0E710025E726 /* AMScrollingNavbarViewController.m */; };
+		623016EC1B3E0E710025E726 /* AMScrollingNavbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 623016EA1B3E0E710025E726 /* AMScrollingNavbarViewController.m */; };
 		62A42F641B34CDFE00A2E194 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A42F631B34CDFE00A2E194 /* AppDelegate.swift */; };
 		62A42F6D1B34CDFE00A2E194 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62A42F6C1B34CDFE00A2E194 /* Images.xcassets */; };
 		62A42F701B34CDFE00A2E194 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62A42F6E1B34CDFE00A2E194 /* LaunchScreen.xib */; };
@@ -79,6 +83,10 @@
 		6230166F1B3B6AD00025E726 /* OutgoingListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingListViewController.swift; sourceTree = "<group>"; };
 		623016711B3B6B500025E726 /* OutgoingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingDetailViewController.swift; sourceTree = "<group>"; };
 		623016E11B3BD41B0025E726 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		623016E41B3E06D20025E726 /* XXYNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXYNavigationController.h; sourceTree = "<group>"; };
+		623016E61B3E06E60025E726 /* XXYNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXYNavigationController.m; sourceTree = "<group>"; };
+		623016E91B3E0E680025E726 /* AMScrollingNavbarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScrollingNavbarViewController.h; sourceTree = "<group>"; };
+		623016EA1B3E0E710025E726 /* AMScrollingNavbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMScrollingNavbarViewController.m; sourceTree = "<group>"; };
 		62A42F5E1B34CDFE00A2E194 /* 记账.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "记账.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62A42F621B34CDFE00A2E194 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62A42F631B34CDFE00A2E194 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -164,6 +172,10 @@
 		623016731B3B6B650025E726 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				623016E91B3E0E680025E726 /* AMScrollingNavbarViewController.h */,
+				623016EA1B3E0E710025E726 /* AMScrollingNavbarViewController.m */,
+				623016E41B3E06D20025E726 /* XXYNavigationController.h */,
+				623016E61B3E06E60025E726 /* XXYNavigationController.m */,
 				6230166D1B39BD950025E726 /* SCLAlertView.swift */,
 			);
 			name = resource;
@@ -349,9 +361,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				623016E71B3E06E60025E726 /* XXYNavigationController.m in Sources */,
 				62D91D361B34DCA800316A01 /* OutgoingManager.swift in Sources */,
 				62C296021B35191B00557764 /* String-Extras.swift in Sources */,
 				62A42F641B34CDFE00A2E194 /* AppDelegate.swift in Sources */,
+				623016EB1B3E0E710025E726 /* AMScrollingNavbarViewController.m in Sources */,
 				623016721B3B6B500025E726 /* OutgoingDetailViewController.swift in Sources */,
 				623016701B3B6AD00025E726 /* OutgoingListViewController.swift in Sources */,
 				62A42F861B34D12A00A2E194 /* InfoViewController.swift in Sources */,
@@ -367,6 +381,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				62A42F7C1B34CDFE00A2E194 /* __Tests.swift in Sources */,
+				623016EC1B3E0E710025E726 /* AMScrollingNavbarViewController.m in Sources */,
+				623016E81B3E06E60025E726 /* XXYNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +531,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -526,6 +543,8 @@
 				INFOPLIST_FILE = "记账Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "记账/记账Tests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/记账.app/记账";
 			};
 			name = Debug;
@@ -534,6 +553,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -541,6 +561,7 @@
 				INFOPLIST_FILE = "记账Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "记账/记账Tests-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/记账.app/记账";
 			};
 			name = Release;

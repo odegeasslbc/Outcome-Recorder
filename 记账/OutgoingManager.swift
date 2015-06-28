@@ -15,8 +15,9 @@ struct outgoing {
     var id = "un-ided"
     var name = "un-named"
     var desc = "un-described"
-    var cost = "0"
+    var cost:Double = 0
     var user = "un-usered"
+    var date = NSDate()
 }
 
 class OutgoingManager:NSObject {
@@ -28,18 +29,19 @@ class OutgoingManager:NSObject {
         super.init()
         
         let db = SQLiteDB.sharedInstance()
-        db.execute("drop table outgoings")
-        db.execute("create table if not exists outgoings(id varchar(20) primary key,objectid varchar(20),name varchar(20),desc varchar(20),cost varchar(20),user varchar(20))")
+        //db.execute("drop table outgoings")
+        db.execute("create table if not exists outgoings(id varchar(20) primary key,objectid varchar(20),name varchar(20),desc varchar(20),cost number(20),user varchar(20),date DATETIME)")
         let data = db.query("select * from outgoings where user = '\(userName)'")
         for item in data{
             let outgoingItem = item as SQLRow
             let newName = outgoingItem["name"]?.asString()
             let newDesc = outgoingItem["desc"]?.asString()
-            let newCost = outgoingItem["cost"]?.asString()
+            let newCost = outgoingItem["cost"]?.asDouble()
             let newUser = outgoingItem["user"]?.asString()
             let newId = outgoingItem["objectid"]?.asString()
+            let newDate = outgoingItem["date"]?.asDate()
             //println(newId)
-            self.outgoings.append(outgoing(id:newId!,name:newName!, desc: newDesc!, cost: newCost!,user: newUser!))
+            self.outgoings.append(outgoing(id:newId!,name:newName!, desc: newDesc!, cost: newCost!,user: newUser!,date: newDate!))
         }
         
         
@@ -56,7 +58,7 @@ class OutgoingManager:NSObject {
         return id
     }
     
-    func addOutgoing(id:String,name:String,desc:String,cost:String,user:String){
+    func addOutgoing(id:String,name:String,desc:String,cost:Double,user:String,date:NSDate){
         if loginStatus == "yes"{
             var outgoing = PFObject(className: "Outgoing")
             outgoing["name"] = name
@@ -64,11 +66,12 @@ class OutgoingManager:NSObject {
             outgoing["cost"] = cost
             outgoing["id"] = id
             outgoing["user"] = PFUser.currentUser()!
+            outgoing["date"] = date
             outgoing.save()
         }
         
-        outgoings.append(outgoing(id:id,name: name, desc: desc, cost: cost,user: user))
-        db.execute("insert into outgoings(objectid,name,desc,cost,user) values ('\(id)','\(name)','\(desc)','\(cost)','\(user)')")
+        outgoings.append(outgoing(id:id,name: name, desc: desc, cost: cost,user: user,date:date))
+        db.execute("insert into outgoings(objectid,name,desc,cost,user,date) values ('\(id)','\(name)','\(desc)','\(cost)','\(user)','\(date)')")
     }
     
     func removeOutgoing(index:Int){
@@ -105,9 +108,13 @@ class OutgoingManager:NSObject {
                             var id = object["id"] as! String
                             var name = object["name"] as! String
                             var desc = object["desc"] as! String
-                            var cost = object["cost"] as! String
+                            var date = object["date"] as! NSDate
+                            if var cost = object["cost"] as? Double{
                         //println("\(name) , \(desc), \(cost)")
-                            outgoingManager.addOutgoing(id, name:name, desc: desc, cost: cost,user:userName)
+                                outgoingManager.addOutgoing(id, name:name, desc: desc, cost: cost,user:userName,date:date)
+                            }else{
+                                outgoingManager.addOutgoing(id, name:name, desc: desc, cost: 0,user:userName,date:date)
+                            }
                         }
                     }
                 } else {
@@ -119,16 +126,18 @@ class OutgoingManager:NSObject {
         else{
             let db = SQLiteDB.sharedInstance()
             //db.execute("drop table outgoings")
-            db.execute("create table if not exists outgoings(id varchar(20) primary key,objectid varchar(20),name varchar(20),desc varchar(20),cost varchar(20),user varchar(20))")
+            db.execute("create table if not exists outgoings(id varchar(20) primary key,objectid varchar(20),name varchar(20),desc varchar(20),cost number(20),user varchar(20))")
             let data = db.query("select * from outgoings where user = 'un-usered'")
             for item in data{
                 let outgoingItem = item as SQLRow
-                let newId = outgoingItem["id"]?.asString()
+                let newId = outgoingItem["objectid"]?.asString()
                 let newName = outgoingItem["name"]?.asString()
                 let newDesc = outgoingItem["desc"]?.asString()
-                let newCost = outgoingItem["cost"]?.asString()
+                let newCost = outgoingItem["cost"]?.asDouble()
                 let newUser = outgoingItem["user"]?.asString()
-                self.addOutgoing(newId!,name:newName!, desc: newDesc!, cost: newCost!,user: newUser!)
+                let newDate = outgoingItem["date"]?.asDate()
+
+                self.addOutgoing(newId!,name:newName!, desc: newDesc!, cost: newCost!,user: newUser!,date: newDate!)
             }
 
         }
@@ -144,12 +153,13 @@ class OutgoingManager:NSObject {
         let data = db.query("select * from outgoings where user = 'un-usered'")
         for item in data{
             let outgoingItem = item as SQLRow
-            let newId = outgoingItem["id"]?.asString()
+            let newId = outgoingItem["objectid"]?.asString()
             let newName = outgoingItem["name"]?.asString()
             let newDesc = outgoingItem["desc"]?.asString()
-            let newCost = outgoingItem["cost"]?.asString()
+            let newCost = outgoingItem["cost"]?.asDouble()
             let newUser = outgoingItem["user"]?.asString()
-            newOutgoings.append(outgoing(id: newId!,name: newName!, desc: newDesc!, cost: newCost!,user: newUser!))
+            let newDate = outgoingItem["date"]?.asDate()
+            newOutgoings.append(outgoing(id: newId!,name: newName!, desc: newDesc!, cost: newCost!,user: newUser!,date: newDate!))
         }
         
         for item in newOutgoings{
@@ -158,6 +168,7 @@ class OutgoingManager:NSObject {
             outgoing["name"] = item.name
             outgoing["desc"] = item.desc
             outgoing["cost"] = item.cost
+            outgoing["date"] = item.date
             outgoing["user"] = PFUser.currentUser()
             outgoing.save()
         }
@@ -167,9 +178,9 @@ class OutgoingManager:NSObject {
     func syncToLocal(){
         let db = SQLiteDB.sharedInstance()
         db.execute("drop table outgoings")
-        db.execute("create table if not exists outgoings(id varchar(20) primary key,objectid varchar(20),name varchar(20),desc varchar(20),cost varchar(20),user varchar(20))")
+        db.execute("create table if not exists outgoings(id varchar(20) primary key,objectid varchar(20),name varchar(20),desc varchar(20),cost number(20),user varchar(20),date DATETIME)")
         for item in outgoings{
-            let sql = "insert into outgoings(objectid,name,desc,cost,user) values ('\(item.id)','\(item.name)','\(item.desc)','\(item.cost)','un-usered')"
+            let sql = "insert into outgoings(objectid,name,desc,cost,user,date) values ('\(item.id)','\(item.name)','\(item.desc)','\(item.cost)','un-usered','\(item.date)')"
             let result = db.execute(sql)
         }
         

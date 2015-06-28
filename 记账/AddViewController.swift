@@ -16,7 +16,13 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func addButton(sender: AnyObject) {
         let id = createId()
-        outgoingManager.addOutgoing(id,name: nameTextfield.text,desc:descTextfield.text,cost:costTextfield.text,user:userName)
+        let cost = (costTextfield.text! as NSString).doubleValue
+        
+        //let fourHours = NSTimeInterval(60*60*4)
+        //let date = NSDate(timeInterval:-fourHours,sinceDate: NSDate())
+        
+        let date = NSDate()
+        outgoingManager.addOutgoing(id,name: nameTextfield.text,desc:descTextfield.text,cost:cost,user:userName,date:date)
         self.view.endEditing(true)
         costTextfield.text = " "
         descTextfield.text = " "

@@ -34,6 +34,9 @@ class OutgoingListViewController: UIViewController,UITableViewDelegate,UITableVi
             self.detailViewController = controllers[controllers.count-1].topViewController as? OutgoingDetailViewController
         }
         //PFUser.requestPasswordResetForEmail("fy66@scarletmail.rutgers.edu")
+        
+        //设置tableview分割线不显示
+        outgoingTable.separatorStyle = UITableViewCellSeparatorStyle.None
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,7 +61,12 @@ class OutgoingListViewController: UIViewController,UITableViewDelegate,UITableVi
             let dvc:OutgoingDetailViewController! = segue.destinationViewController as! OutgoingDetailViewController
             //let dvc = segue.destinationViewController
             //println(userName)
-            dvc.detailItem = outgoing(id: cell.id!, name: cell.nameLabel.text!, desc: cell.descLabel.text!, cost: cell.costLabel.text!,user: userName)
+            let cost = (cell.costLabel.text! as NSString).doubleValue
+            dvc.detailItem = outgoing(id: cell.id!, name: cell.nameLabel.text!, desc: cell.descLabel.text!, cost: cost,user: userName,date:cell.date!)
+            println(cell.id)
+            //segue.destinationViewController = rootVC
+            
+            
             //dvc.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
             //dvc.navigationItem.leftItemsSupplementBackButton = true
 
@@ -71,8 +79,9 @@ class OutgoingListViewController: UIViewController,UITableViewDelegate,UITableVi
         cell.id = outgoingManager.outgoings[outgoingManager.outgoings.count-1-indexPath.row].id
         cell.nameLabel.text = outgoingManager.outgoings[outgoingManager.outgoings.count-1-indexPath.row].name
         cell.descLabel.text = outgoingManager.outgoings[outgoingManager.outgoings.count-1-indexPath.row].desc
-        cell.costLabel.text = outgoingManager.outgoings[outgoingManager.outgoings.count-1-indexPath.row].cost
-        
+        let cost = String(stringInterpolationSegment:outgoingManager.outgoings[outgoingManager.outgoings.count-1-indexPath.row].cost)
+        cell.costLabel.text = cost
+        cell.date = outgoingManager.outgoings[outgoingManager.outgoings.count-1-indexPath.row].date
         return cell
     }
     
@@ -85,6 +94,10 @@ class OutgoingListViewController: UIViewController,UITableViewDelegate,UITableVi
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return outgoingManager.outgoings.count
+    }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.tabBarController?.hidesBottomBarWhenPushed = true
     }
     
 }

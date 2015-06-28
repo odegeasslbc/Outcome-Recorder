@@ -11,5 +11,8 @@
 
 #import "sqlite3.h"
 #import <time.h>
+#import "XXYNavigationController.h"
+#import "AMScrollingNavbarViewController.h"
+
 
 #endif

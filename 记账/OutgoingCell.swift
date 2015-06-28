@@ -11,14 +11,23 @@ import UIKit
 class OutgoingCell: UITableViewCell {
     var test:String!
     
+    @IBOutlet var halfView: UIView!
+    @IBOutlet var backView: UIView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var descLabel: UILabel!
     @IBOutlet var costLabel: UILabel!
+    var date:NSDate?
+    
     var id:String!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        //backView.layer.cornerRadius = 8.8
+        //halfView.layer.cornerRadius = 8.8
+        //costLabel.clipsToBounds = true
+        //costLabel.layer.cornerRadius = 45
         
+        //self.contentView.addSubview(backgroundLabel)
         // Initialization code
     }
     
