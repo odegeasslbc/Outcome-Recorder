@@ -6,13 +6,11 @@
 //  Copyright (c) 2015年 刘炳辰. All rights reserved.
 //
 
-#ifndef sql_test_Bridging_Header_h
-#define sql_test_Bridging_Header_h
+#ifndef Bridging_Header_h
+#define Bridging_Header_h
 
 #import "sqlite3.h"
 #import <time.h>
-#import "XXYNavigationController.h"
-#import "AMScrollingNavbarViewController.h"
-
+#import "CFShareCircleView.h"
 
 #endif

@@ -31,15 +31,19 @@
 		623016721B3B6B500025E726 /* OutgoingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623016711B3B6B500025E726 /* OutgoingDetailViewController.swift */; };
 		623016E21B3BD41B0025E726 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 623016E11B3BD41B0025E726 /* Main.storyboard */; };
 		623016E31B3BD41B0025E726 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 623016E11B3BD41B0025E726 /* Main.storyboard */; };
-		623016E71B3E06E60025E726 /* XXYNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 623016E61B3E06E60025E726 /* XXYNavigationController.m */; };
-		623016E81B3E06E60025E726 /* XXYNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 623016E61B3E06E60025E726 /* XXYNavigationController.m */; };
-		623016EB1B3E0E710025E726 /* AMScrollingNavbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 623016EA1B3E0E710025E726 /* AMScrollingNavbarViewController.m */; };
-		623016EC1B3E0E710025E726 /* AMScrollingNavbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 623016EA1B3E0E710025E726 /* AMScrollingNavbarViewController.m */; };
+		6253CB0B1B5089D60060C742 /* CBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6253CB0A1B5089D60060C742 /* CBViewController.swift */; };
+		6253CB0E1B5093E70060C742 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6253CB0D1B5093E70060C742 /* RegisterView.swift */; };
+		6253CB101B5093F70060C742 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6253CB0F1B5093F70060C742 /* LoginView.swift */; };
 		62A42F641B34CDFE00A2E194 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A42F631B34CDFE00A2E194 /* AppDelegate.swift */; };
 		62A42F6D1B34CDFE00A2E194 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62A42F6C1B34CDFE00A2E194 /* Images.xcassets */; };
 		62A42F701B34CDFE00A2E194 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62A42F6E1B34CDFE00A2E194 /* LaunchScreen.xib */; };
 		62A42F7C1B34CDFE00A2E194 /* __Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A42F7B1B34CDFE00A2E194 /* __Tests.swift */; };
 		62A42F861B34D12A00A2E194 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A42F851B34D12A00A2E194 /* InfoViewController.swift */; };
+		62BB8F081B5084AD00F3BDFC /* CFShareCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62BB8EDD1B5084AD00F3BDFC /* CFShareCircleView.m */; };
+		62BB8F091B5084AD00F3BDFC /* CFShareCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62BB8EDD1B5084AD00F3BDFC /* CFShareCircleView.m */; };
+		62BB8F0A1B5084AD00F3BDFC /* CFSharer.m in Sources */ = {isa = PBXBuildFile; fileRef = 62BB8EDF1B5084AD00F3BDFC /* CFSharer.m */; };
+		62BB8F0B1B5084AD00F3BDFC /* CFSharer.m in Sources */ = {isa = PBXBuildFile; fileRef = 62BB8EDF1B5084AD00F3BDFC /* CFSharer.m */; };
+		62BB8F111B5085E300F3BDFC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BB8F101B5085E300F3BDFC /* UIKit.framework */; };
 		62C295FA1B35181A00557764 /* data.db in Resources */ = {isa = PBXBuildFile; fileRef = 62C295F91B35181A00557764 /* data.db */; };
 		62C295FC1B35183700557764 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 62C295FB1B35183700557764 /* libsqlite3.0.dylib */; };
 		62C296001B35191000557764 /* SQLiteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C295FF1B35191000557764 /* SQLiteDB.swift */; };
@@ -83,10 +87,10 @@
 		6230166F1B3B6AD00025E726 /* OutgoingListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingListViewController.swift; sourceTree = "<group>"; };
 		623016711B3B6B500025E726 /* OutgoingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingDetailViewController.swift; sourceTree = "<group>"; };
 		623016E11B3BD41B0025E726 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		623016E41B3E06D20025E726 /* XXYNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXYNavigationController.h; sourceTree = "<group>"; };
-		623016E61B3E06E60025E726 /* XXYNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXYNavigationController.m; sourceTree = "<group>"; };
-		623016E91B3E0E680025E726 /* AMScrollingNavbarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScrollingNavbarViewController.h; sourceTree = "<group>"; };
-		623016EA1B3E0E710025E726 /* AMScrollingNavbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMScrollingNavbarViewController.m; sourceTree = "<group>"; };
+		6253CB091B50883F0060C742 /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		6253CB0A1B5089D60060C742 /* CBViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBViewController.swift; sourceTree = "<group>"; };
+		6253CB0D1B5093E70060C742 /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		6253CB0F1B5093F70060C742 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		62A42F5E1B34CDFE00A2E194 /* 记账.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "记账.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62A42F621B34CDFE00A2E194 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62A42F631B34CDFE00A2E194 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,9 +100,14 @@
 		62A42F7A1B34CDFE00A2E194 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62A42F7B1B34CDFE00A2E194 /* __Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __Tests.swift; sourceTree = "<group>"; };
 		62A42F851B34D12A00A2E194 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		62BB8EDC1B5084AD00F3BDFC /* CFShareCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFShareCircleView.h; sourceTree = "<group>"; };
+		62BB8EDD1B5084AD00F3BDFC /* CFShareCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFShareCircleView.m; sourceTree = "<group>"; };
+		62BB8EDE1B5084AD00F3BDFC /* CFSharer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFSharer.h; sourceTree = "<group>"; };
+		62BB8EDF1B5084AD00F3BDFC /* CFSharer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFSharer.m; sourceTree = "<group>"; };
+		62BB8F101B5085E300F3BDFC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		62C295F91B35181A00557764 /* data.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = data.db; sourceTree = "<group>"; };
 		62C295FB1B35183700557764 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
-		62C295FD1B35188600557764 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		62C295FD1B35188600557764 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "../Bridging-Header.h"; sourceTree = "<group>"; };
 		62C295FF1B35191000557764 /* SQLiteDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteDB.swift; sourceTree = "<group>"; };
 		62C296011B35191B00557764 /* String-Extras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String-Extras.swift"; sourceTree = "<group>"; };
 		62D91D331B34D59F00316A01 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62BB8F111B5085E300F3BDFC /* UIKit.framework in Frameworks */,
 				6230166C1B38D4F60025E726 /* Social.framework in Frameworks */,
 				6230166A1B38D4EF0025E726 /* Accounts.framework in Frameworks */,
 				623016681B38D4DD0025E726 /* libsqlite3.dylib in Frameworks */,
@@ -147,6 +157,7 @@
 		623016461B38D41F0025E726 /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				62BB8F101B5085E300F3BDFC /* UIKit.framework */,
 				6230166B1B38D4F60025E726 /* Social.framework */,
 				623016691B38D4EF0025E726 /* Accounts.framework */,
 				623016631B38D4C50025E726 /* SystemConfiguration.framework */,
@@ -169,16 +180,24 @@
 			path = "parse-library-1.7.4";
 			sourceTree = "<group>";
 		};
-		623016731B3B6B650025E726 /* resource */ = {
+		623016731B3B6B650025E726 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				623016E91B3E0E680025E726 /* AMScrollingNavbarViewController.h */,
-				623016EA1B3E0E710025E726 /* AMScrollingNavbarViewController.m */,
-				623016E41B3E06D20025E726 /* XXYNavigationController.h */,
-				623016E61B3E06E60025E726 /* XXYNavigationController.m */,
+				6253CB0A1B5089D60060C742 /* CBViewController.swift */,
 				6230166D1B39BD950025E726 /* SCLAlertView.swift */,
+				62C296011B35191B00557764 /* String-Extras.swift */,
+				62C295FF1B35191000557764 /* SQLiteDB.swift */,
 			);
-			name = resource;
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		6253CB0C1B5093B50060C742 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				6253CB0D1B5093E70060C742 /* RegisterView.swift */,
+				6253CB0F1B5093F70060C742 /* LoginView.swift */,
+			);
+			name = Account;
 			sourceTree = "<group>";
 		};
 		62A42F551B34CDFE00A2E194 = {
@@ -188,7 +207,6 @@
 				623016651B38D4D00025E726 /* libz.dylib */,
 				62C295FB1B35183700557764 /* libsqlite3.0.dylib */,
 				62C295F91B35181A00557764 /* data.db */,
-				62C295FD1B35188600557764 /* Bridging-Header.h */,
 				623016461B38D41F0025E726 /* frameworks */,
 				62A42F601B34CDFE00A2E194 /* 记账 */,
 				62A42F781B34CDFE00A2E194 /* 记账Tests */,
@@ -208,19 +226,22 @@
 		62A42F601B34CDFE00A2E194 /* 记账 */ = {
 			isa = PBXGroup;
 			children = (
-				623016731B3B6B650025E726 /* resource */,
-				62C295FE1B3518FB00557764 /* database */,
+				62C295FD1B35188600557764 /* Bridging-Header.h */,
+				6253CB0C1B5093B50060C742 /* Account */,
+				62BB8EC71B50849400F3BDFC /* CBViewController */,
+				623016731B3B6B650025E726 /* Classes */,
 				62A42F631B34CDFE00A2E194 /* AppDelegate.swift */,
-				62D91D371B34E1B800316A01 /* OutgoingCell.swift */,
 				62D91D351B34DCA800316A01 /* OutgoingManager.swift */,
+				62D91D371B34E1B800316A01 /* OutgoingCell.swift */,
 				62D91D331B34D59F00316A01 /* AddViewController.swift */,
 				6230166F1B3B6AD00025E726 /* OutgoingListViewController.swift */,
 				623016711B3B6B500025E726 /* OutgoingDetailViewController.swift */,
 				62A42F851B34D12A00A2E194 /* InfoViewController.swift */,
 				623016E11B3BD41B0025E726 /* Main.storyboard */,
-				62A42F6C1B34CDFE00A2E194 /* Images.xcassets */,
 				62A42F6E1B34CDFE00A2E194 /* LaunchScreen.xib */,
+				62A42F6C1B34CDFE00A2E194 /* Images.xcassets */,
 				62A42F611B34CDFE00A2E194 /* Supporting Files */,
+				6253CB091B50883F0060C742 /* Header.h */,
 			);
 			path = "记账";
 			sourceTree = "<group>";
@@ -250,13 +271,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		62C295FE1B3518FB00557764 /* database */ = {
+		62BB8EC71B50849400F3BDFC /* CBViewController */ = {
 			isa = PBXGroup;
 			children = (
-				62C296011B35191B00557764 /* String-Extras.swift */,
-				62C295FF1B35191000557764 /* SQLiteDB.swift */,
+				62BB8EDC1B5084AD00F3BDFC /* CFShareCircleView.h */,
+				62BB8EDD1B5084AD00F3BDFC /* CFShareCircleView.m */,
+				62BB8EDE1B5084AD00F3BDFC /* CFSharer.h */,
+				62BB8EDF1B5084AD00F3BDFC /* CFSharer.m */,
 			);
-			name = database;
+			name = CBViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,14 +384,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				623016E71B3E06E60025E726 /* XXYNavigationController.m in Sources */,
 				62D91D361B34DCA800316A01 /* OutgoingManager.swift in Sources */,
 				62C296021B35191B00557764 /* String-Extras.swift in Sources */,
 				62A42F641B34CDFE00A2E194 /* AppDelegate.swift in Sources */,
-				623016EB1B3E0E710025E726 /* AMScrollingNavbarViewController.m in Sources */,
+				6253CB101B5093F70060C742 /* LoginView.swift in Sources */,
+				6253CB0E1B5093E70060C742 /* RegisterView.swift in Sources */,
 				623016721B3B6B500025E726 /* OutgoingDetailViewController.swift in Sources */,
+				62BB8F081B5084AD00F3BDFC /* CFShareCircleView.m in Sources */,
+				6253CB0B1B5089D60060C742 /* CBViewController.swift in Sources */,
 				623016701B3B6AD00025E726 /* OutgoingListViewController.swift in Sources */,
 				62A42F861B34D12A00A2E194 /* InfoViewController.swift in Sources */,
+				62BB8F0A1B5084AD00F3BDFC /* CFSharer.m in Sources */,
 				6230166E1B39BD950025E726 /* SCLAlertView.swift in Sources */,
 				62D91D381B34E1B800316A01 /* OutgoingCell.swift in Sources */,
 				62D91D341B34D59F00316A01 /* AddViewController.swift in Sources */,
@@ -381,8 +407,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				62A42F7C1B34CDFE00A2E194 /* __Tests.swift in Sources */,
-				623016EC1B3E0E710025E726 /* AMScrollingNavbarViewController.m in Sources */,
-				623016E81B3E06E60025E726 /* XXYNavigationController.m in Sources */,
+				62BB8F0B1B5084AD00F3BDFC /* CFSharer.m in Sources */,
+				62BB8F091B5084AD00F3BDFC /* CFShareCircleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,7 +530,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0228d862-5d4a-41bf-b28b-886d9457b44b";
-				SDKROOT = iphoneos8.3;
+				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 			};
 			name = Debug;
@@ -522,7 +548,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0228d862-5d4a-41bf-b28b-886d9457b44b";
-				SDKROOT = iphoneos8.3;
+				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 			};
 			name = Release;

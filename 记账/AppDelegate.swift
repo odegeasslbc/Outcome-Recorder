@@ -10,9 +10,10 @@ import UIKit
 import Parse
 import Bolts
 
-//这里是两个全局变量，所有class都可以调用
+//这里是几个全局变量，所有class都可以调用
 var loginStatus = "no"
 var userName:String = "un-usered"
+let outgoingManager: OutgoingManager = OutgoingManager()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -118,7 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         //当应用关闭，自动保存所有项目
-        //outgoingManager.saveOnCloud()
+        outgoingManager.saveToLocal()
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 

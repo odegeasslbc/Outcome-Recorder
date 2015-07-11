@@ -8,25 +8,75 @@
 import Parse
 import UIKit
 
-class OutgoingListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource{
+class OutgoingListViewController: CBViewController,UITableViewDelegate,UITableViewDataSource{
     
     var index:NSIndexPath?
     
     var detailViewController: OutgoingDetailViewController? = nil
     
+    @IBOutlet var userLabel: UILabel!
     @IBOutlet var outgoingTable: UITableView!
     
+    func reloadTable(){
+        outgoingManager.syncWithCloud()
+        println(outgoingManager.outgoings.count)
+        self.view.alpha = 0.9
+        UIView.animateWithDuration(0.8, animations: {self.view.alpha=0.1}, completion: { finished in
+            self.outgoingTable.reloadData()
+            self.view.alpha=1
+        })
+    }
+    
+    //****** 小圆球执行的事件将在这里进行 ******
+    override func shareCircleView(aShareCircleView: CFShareCircleView!, didSelectSharer sharer: CFSharer!) {
+        panView.center = panviewPosition
+        if(sharer.name == "Info"){
+            //跳转到信息页面
+            self.tabBarController?.selectedIndex = 0
+        }else if(sharer.name == "Add"){
+            //跳转到添加页面
+            self.tabBarController?.selectedIndex = 2
+        }else if(sharer.name == "Sync"){
+            //刷新数据
+            self.reloadTable()
+        }else if(sharer.name == "Login"){
+            //显示登录页面
+            let view = LoginView(frame:CGRectMake(50, -350, self.view.frame.width-100, 350))
+
+            self.view.addSubview(view)
+            self.view.bringSubviewToFront(view)
+            UIView.animateWithDuration(0.6, animations: {
+                view.holderView.center = self.view.center
+            })
+        }else if(sharer.name == "Log Out"){
+            //登出操作
+            if(loginStatus == "yes"){
+                let alert = SCLAlertView()
+                alert.addButton("保留数据"){
+                    //这会删除上一个本地用户的数据
+                    outgoingManager.syncToLocal()
+                    PFUser.logOut()
+                    userName = "un-usered"
+                    loginStatus = "no"
+                    self.userLabel.text = userName
+                }
+                alert.addButton("清空数据"){
+                    userName = "un-usered"
+                    loginStatus = "no"
+                    PFUser.logOut()
+                    self.userLabel.text = userName
+                    self.reloadTable()
+                }
+                alert.showInfo("您将登出", subTitle: "是否清空本地数据？",closeButtonTitle:"取消登出")
+            }
+        }
+    }
+    //****** 小圆球执行的事件将在这里进行 ******
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        /*
-        var currentUser = PFUser.currentUser()
-        if currentUser != nil {
-            loginStatus = "yes"
-            userName = currentUser!.username!
-        }
-        println("login: \(loginStatus),username:\(userName)")
-        */
+
+        outgoingTable.tag = 19
         outgoingTable.reloadData()
         
         if let split = self.splitViewController {
@@ -39,17 +89,14 @@ class OutgoingListViewController: UIViewController,UITableViewDelegate,UITableVi
         outgoingTable.separatorStyle = UITableViewCellSeparatorStyle.None
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     //returning the view
     override func viewWillAppear(animated: Bool) {
-        //println(outgoingManager.outgoings)
+        userLabel.text = userName
         outgoingTable.reloadData()
+        self.tabBarController?.tabBar.hidden = true
     }
     
+    //****** tableView 相关 ******
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "show detail"){
             //let indexPath = self.outgoingTable.indexPathForCell(sender as! OutgoingCell)
@@ -73,7 +120,6 @@ class OutgoingListViewController: UIViewController,UITableViewDelegate,UITableVi
         }
     }
     
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("OutgoingCell", forIndexPath: indexPath) as! OutgoingCell
         cell.id = outgoingManager.outgoings[outgoingManager.outgoings.count-1-indexPath.row].id
@@ -95,10 +141,27 @@ class OutgoingListViewController: UIViewController,UITableViewDelegate,UITableVi
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return outgoingManager.outgoings.count
     }
+    //****** tableView 相关 ******
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        self.tabBarController?.hidesBottomBarWhenPushed = true
+    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+    
     }
     
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        /*
+        if self.tabBarController?.tabBar.hidden == true{
+            UIView.animateWithDuration(2, animations:
+                {self.tabBarController?.tabBar.hidden = false}
+            )
+        }else{
+            self.tabBarController?.tabBar.hidden = true
+        }
+        */
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
 }
 

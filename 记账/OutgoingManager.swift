@@ -9,8 +9,6 @@ import UIKit
 import Foundation
 import Parse
 
-let outgoingManager: OutgoingManager = OutgoingManager()
-
 struct outgoing {
     var id = "un-ided"
     var name = "un-named"
@@ -29,7 +27,6 @@ class OutgoingManager:NSObject {
         super.init()
         
         let db = SQLiteDB.sharedInstance()
-        //db.execute("drop table outgoings")
         db.execute("create table if not exists outgoings(id varchar(20) primary key,objectid varchar(20),name varchar(20),desc varchar(20),cost number(20),user varchar(20),date DATETIME)")
         let data = db.query("select * from outgoings where user = '\(userName)'")
         for item in data{
@@ -43,8 +40,6 @@ class OutgoingManager:NSObject {
             //println(newId)
             self.outgoings.append(outgoing(id:newId!,name:newName!, desc: newDesc!, cost: newCost!,user: newUser!,date: newDate!))
         }
-        
-        
     }
     
     //生成随机10位字符串，用作id进行对数组和数据库即云端数据的操作
@@ -96,34 +91,11 @@ class OutgoingManager:NSObject {
     
     //新用户登录时触发，把云端数据同步到本地。或读取本地"无用户"的数据
     func refreshOutgoings(){
-        outgoings.removeAll(keepCapacity: true)
         if loginStatus == "yes"{
-            var query = PFQuery(className: "Outgoing")
-            query.whereKey("user", equalTo: PFUser.currentUser()!)
-            query.findObjectsInBackgroundWithBlock{
-                (objects: [AnyObject]?, error: NSError?) -> Void in
-                if error == nil {
-                    if let objects = objects as? [PFObject] {
-                        for object in objects {
-                            var id = object["id"] as! String
-                            var name = object["name"] as! String
-                            var desc = object["desc"] as! String
-                            var date = object["date"] as! NSDate
-                            if var cost = object["cost"] as? Double{
-                        //println("\(name) , \(desc), \(cost)")
-                                outgoingManager.addOutgoing(id, name:name, desc: desc, cost: cost,user:userName,date:date)
-                            }else{
-                                outgoingManager.addOutgoing(id, name:name, desc: desc, cost: 0,user:userName,date:date)
-                            }
-                        }
-                    }
-                } else {
-                // Log details of the failure
-                //println("Error: \(error!) \(error!.userInfo!)")
-                }
-            }
+            syncWithCloud()
         }
         else{
+            outgoings.removeAll(keepCapacity: false)
             let db = SQLiteDB.sharedInstance()
             //db.execute("drop table outgoings")
             db.execute("create table if not exists outgoings(id varchar(20) primary key,objectid varchar(20),name varchar(20),desc varchar(20),cost number(20),user varchar(20))")
@@ -137,13 +109,42 @@ class OutgoingManager:NSObject {
                 let newUser = outgoingItem["user"]?.asString()
                 let newDate = outgoingItem["date"]?.asDate()
 
-                self.addOutgoing(newId!,name:newName!, desc: newDesc!, cost: newCost!,user: newUser!,date: newDate!)
+                self.outgoings.append(outgoing(id:newId!,name:newName!, desc: newDesc!, cost: newCost!,user: newUser!,date: newDate!))
             }
-
         }
         //println(outgoingManager.outgoings)
     }
     
+    func syncWithCloud() -> Bool {
+        outgoings.removeAll(keepCapacity: false)
+        if loginStatus == "yes"{
+            var query = PFQuery(className: "Outgoing")
+            query.whereKey("user", equalTo: PFUser.currentUser()!)
+            query.findObjectsInBackgroundWithBlock{
+                (objects: [AnyObject]?, error: NSError?) -> Void in
+                if error == nil {
+                    if let objects = objects as? [PFObject] {
+                        for object in objects {
+                            var id = object["id"] as! String
+                            var name = object["name"] as! String
+                            var desc = object["desc"] as! String
+                            var date = object["date"] as! NSDate
+                            var cost = object["cost"] as? Double
+                                //println("\(name) , \(desc), \(cost)")
+                            self.outgoings.append(outgoing(id:id,name:name, desc: desc, cost: cost!,user: userName,date: date))
+                        }
+                        
+                    }
+                }else {
+                    // Log details of the failure
+                    println("Error: \(error!) \(error!.userInfo!)")
+                }
+            }
+            
+            return true
+        }
+        return false
+    }
     //把之前未注册用户的数据同步到云端
     func syncToCloudForFirstUser(){
         var newOutgoings = [outgoing]()
@@ -185,6 +186,18 @@ class OutgoingManager:NSObject {
         }
         
     }
+    
+    func saveToLocal(){
+        let db = SQLiteDB.sharedInstance()
+        db.execute("delete from outgoings where user = '\(userName)'")
+        db.execute("create table if not exists outgoings(id varchar(20) primary key,objectid varchar(20),name varchar(20),desc varchar(20),cost number(20),user varchar(20),date DATETIME)")
+        for item in outgoings{
+            let sql = "insert into outgoings(objectid,name,desc,cost,user,date) values ('\(item.id)','\(item.name)','\(item.desc)','\(item.cost)','\(userName)','\(item.date)')"
+            let result = db.execute(sql)
+        }
+        println("save success")
+    }
+
     /*
     //保存当前用户的数据到云端
     func saveOnCloud(){

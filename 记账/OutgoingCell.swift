@@ -22,7 +22,7 @@ class OutgoingCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        //backView.layer.cornerRadius = 8.8
+        backView.layer.cornerRadius = 10
         //halfView.layer.cornerRadius = 8.8
         //costLabel.clipsToBounds = true
         //costLabel.layer.cornerRadius = 45

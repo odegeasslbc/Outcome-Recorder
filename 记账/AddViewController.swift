@@ -14,6 +14,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var descTextfield: UITextField!
     @IBOutlet var nameTextfield: UITextField!
     
+    @IBOutlet var userLabel: UILabel!
     @IBAction func addButton(sender: AnyObject) {
         let id = createId()
         let cost = (costTextfield.text! as NSString).doubleValue
@@ -33,6 +34,11 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        userLabel.text = userName
+        self.tabBarController?.tabBar.hidden = false
     }
     
     //给每一个item生成独一无二的10位随机字符串

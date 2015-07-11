@@ -13,142 +13,14 @@ class InfoViewController: UIViewController,UITextFieldDelegate {
     var currentMoney:Double = 1700
     
     @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var nameText: UITextField!
-    @IBOutlet var emailText: UITextField!
-    @IBOutlet var passwordText: UITextField!
-    
-    @IBOutlet var logoutBtn: UIButton!
-    @IBOutlet var registerBtn: UIButton!
-    @IBOutlet var loginBtn: UIButton!
     
     @IBOutlet var currentMoneyLabel: UILabel!
     @IBOutlet var totalOutgoingLabel: UILabel!
     
-    @IBOutlet var loginView: UIView!
-    
-    @IBAction func loginButton(sender: AnyObject) {
-        self.view.endEditing(true)
-        
-        let alert = SCLAlertView()
-        //在新用户登录前把当前用户数据保存
-        //outgoingManager.saveOnCloud()
-        
-        PFUser.logInWithUsernameInBackground(nameText.text, password: passwordText.text){
-            (user: PFUser?, error: NSError?) -> Void in
-            if user != nil {
-                loginStatus = "yes"
-                userName = user!.username!
-                alert.showInfo("成功", subTitle: "登录成功", closeButtonTitle: "好的", duration: 2.0)
-                
-                self.nameLabel.text = userName
-                self.logoutBtn.hidden = false
-                self.registerBtn.hidden = true
-                self.loginBtn.hidden = true
-                
-                outgoingManager.refreshOutgoings()
-                
-                self.loginView.hidden = true
-            } else {
-                // The login failed. Check error to see why.
-                let errorString = error!.userInfo?["error"] as? String
-                // Show the errorString somewhere and let the user try again.
-                alert.showInfo("失败", subTitle: errorString!, closeButtonTitle: "好的")
-            }
-        }
-        
-        nameText.text = ""
-        passwordText.text = ""
-        emailText.text = ""
-    }
-    
-    @IBAction func registerButton(sender: AnyObject) {
-        self.view.endEditing(true)
-        
-        let alert = SCLAlertView()
-        
-        var user = PFUser()
-        user.username = nameText.text
-        user.password = passwordText.text
-        user.email = emailText.text
-        user.signUpInBackgroundWithBlock {
-            (succeeded: Bool, error: NSError?) -> Void in
-            if let error = error {
-                let errorString = error.userInfo?["error"] as? String
-                // Show the errorString somewhere and let the user try again.
-                alert.showInfo("失败", subTitle: errorString!, closeButtonTitle: "好的")
-            } else {
-                alert.addButton("是的，同步我的数据"){
-                    PFUser.logInWithUsernameInBackground(user.username!, password: user.password!)
-                    userName = user.username!
-                    loginStatus = "yes"
-                    outgoingManager.syncToCloudForFirstUser()
-                }
-                alert.showInfo("成功", subTitle: "成功注册新用户！是否同步本地数据到该账户？", closeButtonTitle: "不了。新建空账户")
-                
-                self.logoutBtn.hidden = false
-                self.registerBtn.hidden = true
-                self.loginBtn.hidden = true
-                
-                self.nameLabel.text = userName
-
-                outgoingManager.refreshOutgoings()
-                
-                self.loginView.hidden = true
-            }
-        }
-        
-        nameText.text = ""
-        passwordText.text = ""
-        emailText.text = ""
-    }
-    
-    @IBAction func logoutButton(sender: AnyObject) {
-        
-        let alert = SCLAlertView()
-        alert.addButton("保留数据"){
-            //这会删除上一个本地用户的数据
-            outgoingManager.syncToLocal()
-            PFUser.logOut()
-            userName = "un-usered"
-            loginStatus = "no"
-            
-            self.logoutBtn.hidden = true
-            self.registerBtn.hidden = false
-            self.loginBtn.hidden = false
-        }
-        alert.addButton("清空数据"){
-            userName = "un-usered"
-            loginStatus = "no"
-            PFUser.logOut()
-            outgoingManager.refreshOutgoings()
-            
-            self.logoutBtn.hidden = true
-            self.registerBtn.hidden = false
-            self.loginBtn.hidden = false
-        }
-        alert.showInfo("您将登出", subTitle: "是否清空本地数据？",closeButtonTitle:"取消登出")
-
-        
-        nameLabel.text = ""
-        nameText.text = ""
-        passwordText.text = ""
-        emailText.text = ""
-    }
-    
-    @IBAction func hideLoginView(sender: AnyObject) {
-        loginView.hidden = true
-    }
-    @IBAction func showLoginView(sender: AnyObject) {
-        loginView.hidden = false
-    }
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
     
     func countTotal()->String{
         var totalCount:Double = 0.0
-        
+
         for item in outgoingManager.outgoings{
             let cost = item.cost
             totalCount += cost
@@ -159,36 +31,25 @@ class InfoViewController: UIViewController,UITextFieldDelegate {
         return String(stringInterpolationSegment: totalCount)        
     }
     
-    func countCurrent(){
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        loginView.layer.cornerRadius = 10
-        loginView.hidden = true
+        nameLabel.text = "un-usered"
         
         if PFUser.currentUser() != nil{
             userName = PFUser.currentUser()!.username!
             nameLabel.text = userName
         }
-        
-        if loginStatus == "no"{
-            logoutBtn.hidden = true
-        }else{
-            loginBtn.hidden = true
-            registerBtn.hidden = true
-        }
-        
+
         totalOutgoingLabel.text = countTotal()
         
     }
 
     override func viewWillAppear(animated: Bool) {
+        nameLabel.text = userName 
         totalOutgoingLabel.text = countTotal()
         currentMoneyLabel.text = String(stringInterpolationSegment: currentMoney)
+        self.tabBarController?.tabBar.hidden = false
     }
     
     override func didReceiveMemoryWarning() {
