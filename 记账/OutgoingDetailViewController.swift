@@ -8,17 +8,6 @@
 
 import UIKit
 
-protocol OutgoingDetailViewControllerDelegate {
-    //func getInfo() -> OutgoingInfo
-    func interact()
-}
-
-struct OutgoingInfo {
-    var name:String = ""
-    var cost:String = ""
-    var desc:String = ""
-    var user:String = ""
-}
 
 class OutgoingDetailViewController: UIViewController {
 
@@ -78,26 +67,11 @@ class OutgoingDetailViewController: UIViewController {
         swipeDownRec.direction = UISwipeGestureRecognizerDirection.Down
         swipeDownRec.addTarget(self,action:"swippedDown")
         self.view.addGestureRecognizer(swipeDownRec)
-        
-        println(costLabel.text)
-        //self.outgoingInfo = delegate?.getInfo()
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

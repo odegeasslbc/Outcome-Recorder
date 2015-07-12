@@ -88,7 +88,7 @@ public class SCLAlertView: UIViewController {
     // Members declaration
     var baseView = UIView()
     var labelTitle = UILabel()
-    var viewText = UITextView()
+    var viewText = UILabel()
     var contentView = UIView()
     var circleBG = UIView(frame:CGRect(x:0, y:0, width:kCircleHeightBackground, height:kCircleHeightBackground))
     var circleView = UIView()
@@ -112,14 +112,15 @@ public class SCLAlertView: UIViewController {
         baseView.frame = view.frame
         baseView.addSubview(contentView)
         // Content View
-        contentView.backgroundColor = UIColor(white:1, alpha:1)
+        contentView.backgroundColor = UIColor(white:1, alpha:0.85)
         contentView.layer.cornerRadius = 5
         contentView.layer.masksToBounds = true
         contentView.layer.borderWidth = 0.5
+        
         contentView.addSubview(labelTitle)
         contentView.addSubview(viewText)
         // Circle View
-        circleBG.backgroundColor = UIColor.whiteColor()
+        circleBG.backgroundColor = UIColor(white:1, alpha:0.9)
         circleBG.layer.cornerRadius = circleBG.frame.size.height / 2
         baseView.addSubview(circleBG)
         circleBG.addSubview(circleView)
@@ -131,19 +132,21 @@ public class SCLAlertView: UIViewController {
         circleIconImageView.frame = CGRect(x:x, y:x, width:kCircleIconHeight, height:kCircleIconHeight)
         // Title
         labelTitle.numberOfLines = 1
+        labelTitle.alpha = 0.85
         labelTitle.textAlignment = .Center
         labelTitle.font = UIFont(name: kDefaultFont, size:20)
         labelTitle.frame = CGRect(x:12, y:kTitleTop, width: kWindowWidth - 24, height:kTitleHeight)
         // View text
-        viewText.editable = false
+        //viewText.editable = false
         viewText.textAlignment = .Center
-        viewText.textContainerInset = UIEdgeInsetsZero
-        viewText.textContainer.lineFragmentPadding = 0;
+        //viewText.textContainerInset = UIEdgeInsetsZero
+        //viewText.textContainer.lineFragmentPadding = 0;
         viewText.font = UIFont(name: kDefaultFont, size:14)
+        
         // Colours
-        contentView.backgroundColor = UIColorFromRGB(0xFFFFFF)
+        //contentView.backgroundColor = UIColorFromRGB(0xFFFFFF)
         labelTitle.textColor = UIColorFromRGB(0x4D4D4D)
-        viewText.textColor = UIColorFromRGB(0x4D4D4D)
+        //viewText.textColor = UIColorFromRGB(0x4D4D4D)
         contentView.layer.borderColor = UIColorFromRGB(0xCCCCCC).CGColor
         //Gesture Recognizer for tapping outside the textinput
         let tapGesture = UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard"))
@@ -226,6 +229,7 @@ public class SCLAlertView: UIViewController {
         btn.addTarget(self, action:Selector("buttonTapped:"), forControlEvents:.TouchUpInside)
         btn.addTarget(self, action:Selector("buttonTapDown:"), forControlEvents:.TouchDown | .TouchDragEnter)
         btn.addTarget(self, action:Selector("buttonRelease:"), forControlEvents:.TouchUpInside | .TouchUpOutside | .TouchCancel | .TouchDragOutside )
+        btn.alpha = 0.85
         return btn
     }
 
@@ -237,6 +241,7 @@ public class SCLAlertView: UIViewController {
         btn.addTarget(self, action:Selector("buttonTapped:"), forControlEvents:.TouchUpInside)
         btn.addTarget(self, action:Selector("buttonTapDown:"), forControlEvents:.TouchDown | .TouchDragEnter)
         btn.addTarget(self, action:Selector("buttonRelease:"), forControlEvents:.TouchUpInside | .TouchUpOutside | .TouchCancel | .TouchDragOutside )
+        btn.alpha = 0.85
         return btn
     }
 
@@ -250,6 +255,7 @@ public class SCLAlertView: UIViewController {
         btn.titleLabel?.font = UIFont(name:kButtonFont, size: 14)
         contentView.addSubview(btn)
         buttons.append(btn)
+        btn.alpha = 0.85
         return btn
     }
 
@@ -273,7 +279,7 @@ public class SCLAlertView: UIViewController {
         var alpha : CGFloat = 0
         btn.backgroundColor?.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         //brightness = brightness * CGFloat(pressBrightness)
-        btn.backgroundColor = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
+        btn.backgroundColor = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 0.9)
     }
 
     func buttonRelease(btn:SCLButton) {
@@ -402,12 +408,12 @@ public class SCLAlertView: UIViewController {
         }
 
         // Animate in the alert view
-        self.baseView.frame.origin.y = -400
+        self.baseView.frame.origin.y = -600
         UIView.animateWithDuration(0.2, animations: {
-            self.baseView.center.y = rv.center.y + 15
+            //self.baseView.center.y = rv.center.y + 15
             self.view.alpha = 1
             }, completion: { finished in
-                UIView.animateWithDuration(0.2, animations: {
+                UIView.animateWithDuration(0.6, animations: {
                     self.baseView.center = rv.center
                 })
         })
@@ -417,8 +423,9 @@ public class SCLAlertView: UIViewController {
 
     // Close SCLAlertView
     public func hideView() {
-        UIView.animateWithDuration(0.2, animations: {
+        UIView.animateWithDuration(0.7, animations: {
             self.view.alpha = 0
+            self.baseView.center.y = 1000
             }, completion: { finished in
                 self.view.removeFromSuperview()
         })

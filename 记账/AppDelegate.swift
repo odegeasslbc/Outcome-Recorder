@@ -14,6 +14,7 @@ import Bolts
 var loginStatus = "no"
 var userName:String = "un-usered"
 let outgoingManager: OutgoingManager = OutgoingManager()
+var firstOpen = true
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

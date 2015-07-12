@@ -33,7 +33,9 @@ class InfoViewController: UIViewController,UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
+        
         nameLabel.text = "un-usered"
         
         if PFUser.currentUser() != nil{
@@ -46,10 +48,15 @@ class InfoViewController: UIViewController,UITextFieldDelegate {
     }
 
     override func viewWillAppear(animated: Bool) {
-        nameLabel.text = userName 
+        if(firstOpen == true){
+            self.tabBarController?.selectedIndex = 2
+        }
+        
+        nameLabel.text = userName
         totalOutgoingLabel.text = countTotal()
         currentMoneyLabel.text = String(stringInterpolationSegment: currentMoney)
         self.tabBarController?.tabBar.hidden = false
+        
     }
     
     override func didReceiveMemoryWarning() {

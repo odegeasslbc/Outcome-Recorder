@@ -19,7 +19,6 @@ class OutgoingListViewController: CBViewController,UITableViewDelegate,UITableVi
     
     func reloadTable(){
         outgoingManager.syncWithCloud()
-        println(outgoingManager.outgoings.count)
         self.view.alpha = 0.9
         UIView.animateWithDuration(0.8, animations: {self.view.alpha=0.1}, completion: { finished in
             self.outgoingTable.reloadData()
@@ -38,7 +37,9 @@ class OutgoingListViewController: CBViewController,UITableViewDelegate,UITableVi
             self.tabBarController?.selectedIndex = 2
         }else if(sharer.name == "Sync"){
             //刷新数据
-            self.reloadTable()
+            if(loginStatus == "yes"){
+                self.reloadTable()
+            }
         }else if(sharer.name == "Login"){
             //显示登录页面
             let view = LoginView(frame:CGRectMake(50, -350, self.view.frame.width-100, 350))
@@ -67,7 +68,7 @@ class OutgoingListViewController: CBViewController,UITableViewDelegate,UITableVi
                     self.userLabel.text = userName
                     self.reloadTable()
                 }
-                alert.showInfo("您将登出", subTitle: "是否清空本地数据？",closeButtonTitle:"取消登出")
+                alert.showNotice("您将登出", subTitle: "是否清空本地数据？",closeButtonTitle:"取消登出")
             }
         }
     }
@@ -76,15 +77,6 @@ class OutgoingListViewController: CBViewController,UITableViewDelegate,UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        outgoingTable.tag = 19
-        outgoingTable.reloadData()
-        
-        if let split = self.splitViewController {
-            let controllers = split.viewControllers
-            self.detailViewController = controllers[controllers.count-1].topViewController as? OutgoingDetailViewController
-        }
-        //PFUser.requestPasswordResetForEmail("fy66@scarletmail.rutgers.edu")
-        
         //设置tableview分割线不显示
         outgoingTable.separatorStyle = UITableViewCellSeparatorStyle.None
     }
@@ -110,13 +102,6 @@ class OutgoingListViewController: CBViewController,UITableViewDelegate,UITableVi
             //println(userName)
             let cost = (cell.costLabel.text! as NSString).doubleValue
             dvc.detailItem = outgoing(id: cell.id!, name: cell.nameLabel.text!, desc: cell.descLabel.text!, cost: cost,user: userName,date:cell.date!)
-            println(cell.id)
-            //segue.destinationViewController = rootVC
-            
-            
-            //dvc.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-            //dvc.navigationItem.leftItemsSupplementBackButton = true
-
         }
     }
     

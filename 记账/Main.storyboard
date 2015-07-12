@@ -273,8 +273,9 @@
                                                                     <exclude reference="TTZ-iz-rdz"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact">
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-UltraLightItalic" family="Helvetica Neue" pointSize="48"/>
+                                                                <rect key="frame" x="96" y="5" width="166" height="84"/>
                                                                 <mask key="constraints">
                                                                     <include reference="TTZ-iz-rdz"/>
                                                                 </mask>
@@ -337,7 +338,8 @@
                                                             <exclude reference="rzg-Se-h2p"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="8" y="8" width="267" height="94"/>
                                                         <mask key="subviews">
                                                             <include reference="Sp5-Zc-or2"/>
                                                             <include reference="yaE-bK-gxA"/>
@@ -991,7 +993,7 @@
     <resources>
         <image name="IMG_0632" width="1527" height="2731"/>
         <image name="add" width="32" height="32"/>
-        <image name="info" width="32" height="32"/>
-        <image name="list" width="32" height="32"/>
+        <image name="info" width="30" height="30"/>
+        <image name="list" width="30" height="30"/>
     </resources>
 </document>

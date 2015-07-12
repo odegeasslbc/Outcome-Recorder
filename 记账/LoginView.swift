@@ -48,7 +48,7 @@ class LoginView: UIView {
             if user != nil {
                 loginStatus = "yes"
                 userName = user!.username!
-                alert.showInfo("成功", subTitle: "登录成功", closeButtonTitle: "好的", duration: 2.0)
+                alert.showSuccess("成功", subTitle: "登录成功", closeButtonTitle: "好的", duration: 2.0)
                 
                 let vc = self.superview?.nextResponder() as! OutgoingListViewController
                 vc.userLabel.text = userName
@@ -60,7 +60,7 @@ class LoginView: UIView {
                 // The login failed. Check error to see why.
                 let errorString = error!.userInfo?["error"] as? String
                 // Show the errorString somewhere and let the user try again.
-                alert.showInfo("失败", subTitle: errorString!, closeButtonTitle: "好的")
+                alert.showError("失败", subTitle: errorString!, closeButtonTitle: "好的")
             }
         }
         

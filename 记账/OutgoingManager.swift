@@ -25,20 +25,24 @@ class OutgoingManager:NSObject {
     
     override init(){
         super.init()
-        
-        let db = SQLiteDB.sharedInstance()
-        db.execute("create table if not exists outgoings(id varchar(20) primary key,objectid varchar(20),name varchar(20),desc varchar(20),cost number(20),user varchar(20),date DATETIME)")
-        let data = db.query("select * from outgoings where user = '\(userName)'")
-        for item in data{
-            let outgoingItem = item as SQLRow
-            let newName = outgoingItem["name"]?.asString()
-            let newDesc = outgoingItem["desc"]?.asString()
-            let newCost = outgoingItem["cost"]?.asDouble()
-            let newUser = outgoingItem["user"]?.asString()
-            let newId = outgoingItem["objectid"]?.asString()
-            let newDate = outgoingItem["date"]?.asDate()
-            //println(newId)
-            self.outgoings.append(outgoing(id:newId!,name:newName!, desc: newDesc!, cost: newCost!,user: newUser!,date: newDate!))
+        if(loginStatus == "yes"){
+            syncWithCloud()
+        }
+        else{
+            let db = SQLiteDB.sharedInstance()
+            db.execute("create table if not exists outgoings(id varchar(20) primary key,objectid varchar(20),name varchar(20),desc varchar(20),cost number(20),user varchar(20),date DATETIME)")
+            let data = db.query("select * from outgoings where user = '\(userName)'")
+            for item in data{
+                let outgoingItem = item as SQLRow
+                let newName = outgoingItem["name"]?.asString()
+                let newDesc = outgoingItem["desc"]?.asString()
+                let newCost = outgoingItem["cost"]?.asDouble()
+                let newUser = outgoingItem["user"]?.asString()
+                let newId = outgoingItem["objectid"]?.asString()
+                let newDate = outgoingItem["date"]?.asDate()
+                //println(newId)
+                self.outgoings.append(outgoing(id:newId!,name:newName!, desc: newDesc!, cost: newCost!,user: newUser!,date: newDate!))
+            }
         }
     }
     

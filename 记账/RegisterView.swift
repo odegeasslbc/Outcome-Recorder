@@ -31,7 +31,7 @@ class RegisterView: UIView {
             if let error = error {
                 let errorString = error.userInfo?["error"] as? String
                 // Show the errorString somewhere and let the user try again.
-                alert.showInfo("失败", subTitle: errorString!, closeButtonTitle: "好的")
+                alert.showError("失败", subTitle: errorString!, closeButtonTitle: "好的")
             } else {
                 alert.addButton("是的，同步我的数据"){
                     PFUser.logInWithUsernameInBackground(user.username!, password: user.password!)
@@ -41,7 +41,7 @@ class RegisterView: UIView {
                     
                     self.close()
                 }
-                alert.showInfo("成功", subTitle: "成功注册新用户！是否同步本地数据到该账户？", closeButtonTitle: "不了。新建空账户")
+                alert.showSuccess("成功", subTitle: "成功注册新用户！是否同步本地数据到该账户？", closeButtonTitle: "不了。新建空账户")
                 
                 PFUser.logInWithUsernameInBackground(user.username!, password: user.password!)
                 userName = user.username!
