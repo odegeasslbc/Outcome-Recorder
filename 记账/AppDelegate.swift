@@ -72,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         println("loginstaus: \(loginStatus), user name : \(userName)")
-                
+        
         return true
     }
     

@@ -76,7 +76,7 @@ class OutgoingListViewController: CBViewController,UITableViewDelegate,UITableVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         //设置tableview分割线不显示
         outgoingTable.separatorStyle = UITableViewCellSeparatorStyle.None
     }

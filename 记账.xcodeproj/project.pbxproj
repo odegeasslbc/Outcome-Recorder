@@ -91,7 +91,6 @@
 		6230166F1B3B6AD00025E726 /* OutgoingListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingListViewController.swift; sourceTree = "<group>"; };
 		623016711B3B6B500025E726 /* OutgoingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingDetailViewController.swift; sourceTree = "<group>"; };
 		623016E11B3BD41B0025E726 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		6253CB091B50883F0060C742 /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		6253CB0A1B5089D60060C742 /* CBViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBViewController.swift; sourceTree = "<group>"; };
 		6253CB0D1B5093E70060C742 /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		6253CB0F1B5093F70060C742 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -246,7 +245,6 @@
 				62A42F6E1B34CDFE00A2E194 /* LaunchScreen.xib */,
 				62A42F6C1B34CDFE00A2E194 /* Images.xcassets */,
 				62A42F611B34CDFE00A2E194 /* Supporting Files */,
-				6253CB091B50883F0060C742 /* Header.h */,
 			);
 			path = "记账";
 			sourceTree = "<group>";

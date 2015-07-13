@@ -16,7 +16,6 @@ protocol TagViewDelegate{
 
 class TagView: UIView {
     
-    var blockView:UIView!
     var tagView:UIView!
     var originFrame:CGRect?
     var tags = [UIButton]()
@@ -31,15 +30,29 @@ class TagView: UIView {
     }
 
     func showWithAnim(){
-        self.tagView.userInteractionEnabled = true
-        UIView.animateWithDuration(0.6, animations: { self.tagView.frame = self.originFrame! }, completion: {finished in self.bringSubviewToFront(self.tagView)})
-        self.isShowing = true
+        
+        UIView.transitionWithView(self.tagView, duration: 0.4, options: UIViewAnimationOptions.CurveLinear, animations: {
+            self.tagView.frame = self.originFrame!
+            var i:CGFloat = 10
+            for btn in self.tags{
+                btn.frame = CGRectMake(10, i, 50, 20)
+                i += 30
+            }
+            }, completion: {
+                finished in self.isShowing = true
+        })
     }
     
     func hideWithAnim(){
-        self.bringSubviewToFront(blockView)
-        UIView.animateWithDuration(0.6, animations: { self.tagView.frame = CGRectMake(0, 0, self.frame.width, self.frame.height/2)})
-        self.isShowing = false
+       
+        UIView.transitionWithView(self.tagView, duration: 0.4, options: UIViewAnimationOptions.CurveLinear, animations: {
+            self.tagView.frame = CGRectMake(0, 0, self.frame.width, 30)
+            for btn in self.tags{
+                btn.frame = CGRectMake(10, 10, 50, 20)
+            }
+            }, completion: {
+            finished in self.isShowing = false
+        })
     }
     
     func tagText(sender:UIButton){
@@ -49,37 +62,29 @@ class TagView: UIView {
     init(point:CGPoint) {
         var height = CGFloat(tagManager.tags.count*30 + 10)
         
-        super.init(frame: CGRectMake(point.x, point.y-height, 70, height*2))
+        super.init(frame: CGRectMake(point.x, point.y, 70, height))
         self.userInteractionEnabled = true
 
         isShowing = false
         
-        blockView = UIView(frame: CGRectMake(0, 0, self.frame.width, height))
-        blockView.backgroundColor = UIColor.whiteColor()
-        self.addSubview(blockView)
-        
-        tagView = UIView(frame: CGRectMake(0, 0, self.frame.width, height))
+        tagView = UIView(frame: CGRectMake(0, 0, self.frame.width, 30))
         tagView.backgroundColor = UIColor.darkGrayColor()
         self.addSubview(tagView)
-        originFrame = CGRectMake(0, height, self.frame.width, height)
-        
-        self.bringSubviewToFront(blockView!)
+        originFrame = CGRectMake(0, 0, self.frame.width, height)
 
-        //self.layer.cornerRadius = 10
-        
-        var i:CGFloat = 10
         for tag in tagManager.tags {
-            let btn = UIButton(frame: CGRectMake(10, i, 50, 20))
+            let btn = UIButton(frame: CGRectMake(10, 10, 50, 20))
             btn.layer.cornerRadius = 5
             btn.titleLabel?.font = UIFont.systemFontOfSize(15)
             btn.backgroundColor = UIColor(red: 1, green: 0.9, blue: 0.58, alpha: 1)
             btn.setTitle(tag, forState: UIControlState.Normal)
             btn.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Highlighted)
             btn.addTarget(self, action: "tagText:", forControlEvents: UIControlEvents.TouchDown)
-            tagView.addSubview(btn)
             self.tags.append(btn)
-            i += 30
+            self.tagView.addSubview(btn)
         }
+        
+        
     }
 
     required init(coder aDecoder: NSCoder) {

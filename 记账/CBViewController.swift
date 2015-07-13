@@ -38,8 +38,8 @@ class CBViewController: UIViewController,CFShareCircleViewDelegate {
         if panView.center.y > self.view.frame.height - 25 {
             panView.center.y = self.view.frame.height - 25
         }
-        if panView.center.y < 45{
-            panView.center.y = 45
+        if panView.center.y < 77{
+            panView.center.y = 77
         }
         
         panView.center = CGPointMake(sender.view!.center.x + translation.x, sender.view!.center.y + translation.y)
@@ -60,12 +60,12 @@ class CBViewController: UIViewController,CFShareCircleViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBarController?.tabBar.hidden = true
+        //self.tabBarController?.tabBar.hidden = true
         
         panView = UIView(frame: CGRectMake(self.view.frame.width-80,self.view.frame.height-80,50,50))
-        panView.backgroundColor = UIColor.darkGrayColor()
+        panView.backgroundColor = UIColor.lightGrayColor()
         panView.layer.cornerRadius = 25
-        panView.alpha = 0.8
+        panView.alpha = 0.7
         panviewPosition = panView.center
         panView.userInteractionEnabled = true
         panView.addGestureRecognizer(panRec)
@@ -73,6 +73,12 @@ class CBViewController: UIViewController,CFShareCircleViewDelegate {
         
         panRec.addTarget(self,action:"draggedView:")
         tapRec.addTarget(self,action:"tappedView:")
+        
+        var roundView = UIView(frame: CGRectMake(12, 12, 26, 26))
+        roundView.backgroundColor = UIColor.blackColor()
+        roundView.layer.cornerRadius = 5
+        roundView.alpha = 0.2
+        panView.addSubview(roundView)
         
         self.view.addSubview(panView)
         self.view.bringSubviewToFront(panView)
