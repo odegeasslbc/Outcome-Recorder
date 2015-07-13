@@ -8,13 +8,33 @@
 
 import UIKit
 
-class AddViewController: UIViewController, UITextFieldDelegate {
+class AddViewController: UIViewController, UITextFieldDelegate, TagViewDelegate {
+
+    var tagButton:UIButton!
+    var tagView:TagView!
 
     @IBOutlet var costTextfield: UITextField!
     @IBOutlet var descTextfield: UITextField!
     @IBOutlet var nameTextfield: UITextField!
     
     @IBOutlet var userLabel: UILabel!
+    
+    func showTagView(){
+        self.view.endEditing(true)
+        if(tagView.isShowing == false){
+            tagView.showWithAnim()
+        }else{
+            tagView.hideWithAnim()
+        }
+        
+    }
+    
+    func drawText(tag: String) {
+        println(tag)
+        var current = self.descTextfield.text
+        self.descTextfield.text = current + " " + tag
+    }
+    
     @IBAction func addButton(sender: AnyObject) {
         let id = createId()
         let cost = (costTextfield.text! as NSString).doubleValue
@@ -57,7 +77,17 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         costTextfield.text = " "
         descTextfield.text = " "
         nameTextfield.text = " "
-        // Do any additional setup after loading the view.
+        
+        var tagButton = UIButton(frame: CGRectMake(self.view.frame.width-100, 250, 70, 30))
+        tagButton.setTitle("Tag", forState: UIControlState.Normal)
+        tagButton.backgroundColor = UIColor.darkGrayColor()
+        tagButton.addTarget(self, action: "showTagView", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        tagView = TagView(point: CGPointMake(tagButton.frame.minX, tagButton.frame.minY+30))
+        tagView.delegate = self
+
+        self.view.addSubview(tagView)
+        self.view.addSubview(tagButton)
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,16 +97,8 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)
-    }
+        tagView.hideWithAnim()
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
-    */
 
 }

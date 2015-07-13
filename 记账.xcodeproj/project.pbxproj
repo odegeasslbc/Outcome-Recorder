@@ -51,6 +51,10 @@
 		62D91D341B34D59F00316A01 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D91D331B34D59F00316A01 /* AddViewController.swift */; };
 		62D91D361B34DCA800316A01 /* OutgoingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D91D351B34DCA800316A01 /* OutgoingManager.swift */; };
 		62D91D381B34E1B800316A01 /* OutgoingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D91D371B34E1B800316A01 /* OutgoingCell.swift */; };
+		62E840101B538AC9004E4D4A /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E8400F1B538AC9004E4D4A /* TagView.swift */; };
+		62E840111B538AC9004E4D4A /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E8400F1B538AC9004E4D4A /* TagView.swift */; };
+		62E840131B538AD2004E4D4A /* TagManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E840121B538AD2004E4D4A /* TagManager.swift */; };
+		62E840141B538AD2004E4D4A /* TagManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E840121B538AD2004E4D4A /* TagManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +117,8 @@
 		62D91D331B34D59F00316A01 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		62D91D351B34DCA800316A01 /* OutgoingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingManager.swift; sourceTree = "<group>"; };
 		62D91D371B34E1B800316A01 /* OutgoingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingCell.swift; sourceTree = "<group>"; };
+		62E8400F1B538AC9004E4D4A /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		62E840121B538AD2004E4D4A /* TagManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,21 +189,22 @@
 		623016731B3B6B650025E726 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				6253CB0A1B5089D60060C742 /* CBViewController.swift */,
-				6230166D1B39BD950025E726 /* SCLAlertView.swift */,
-				62C296011B35191B00557764 /* String-Extras.swift */,
-				62C295FF1B35191000557764 /* SQLiteDB.swift */,
+				62E840151B538B4B004E4D4A /* SCLAlertView */,
+				62E8400E1B538ABA004E4D4A /* TagView */,
+				62E8400D1B538A9D004E4D4A /* Database */,
+				6253CB0C1B5093B50060C742 /* AccountView */,
+				62BB8EC71B50849400F3BDFC /* CBViewController */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
 		};
-		6253CB0C1B5093B50060C742 /* Account */ = {
+		6253CB0C1B5093B50060C742 /* AccountView */ = {
 			isa = PBXGroup;
 			children = (
 				6253CB0D1B5093E70060C742 /* RegisterView.swift */,
 				6253CB0F1B5093F70060C742 /* LoginView.swift */,
 			);
-			name = Account;
+			name = AccountView;
 			sourceTree = "<group>";
 		};
 		62A42F551B34CDFE00A2E194 = {
@@ -227,8 +234,6 @@
 			isa = PBXGroup;
 			children = (
 				62C295FD1B35188600557764 /* Bridging-Header.h */,
-				6253CB0C1B5093B50060C742 /* Account */,
-				62BB8EC71B50849400F3BDFC /* CBViewController */,
 				623016731B3B6B650025E726 /* Classes */,
 				62A42F631B34CDFE00A2E194 /* AppDelegate.swift */,
 				62D91D351B34DCA800316A01 /* OutgoingManager.swift */,
@@ -274,12 +279,39 @@
 		62BB8EC71B50849400F3BDFC /* CBViewController */ = {
 			isa = PBXGroup;
 			children = (
+				6253CB0A1B5089D60060C742 /* CBViewController.swift */,
 				62BB8EDC1B5084AD00F3BDFC /* CFShareCircleView.h */,
 				62BB8EDD1B5084AD00F3BDFC /* CFShareCircleView.m */,
 				62BB8EDE1B5084AD00F3BDFC /* CFSharer.h */,
 				62BB8EDF1B5084AD00F3BDFC /* CFSharer.m */,
 			);
 			name = CBViewController;
+			sourceTree = "<group>";
+		};
+		62E8400D1B538A9D004E4D4A /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				62C295FF1B35191000557764 /* SQLiteDB.swift */,
+				62C296011B35191B00557764 /* String-Extras.swift */,
+			);
+			name = Database;
+			sourceTree = "<group>";
+		};
+		62E8400E1B538ABA004E4D4A /* TagView */ = {
+			isa = PBXGroup;
+			children = (
+				62E840121B538AD2004E4D4A /* TagManager.swift */,
+				62E8400F1B538AC9004E4D4A /* TagView.swift */,
+			);
+			name = TagView;
+			sourceTree = "<group>";
+		};
+		62E840151B538B4B004E4D4A /* SCLAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				6230166D1B39BD950025E726 /* SCLAlertView.swift */,
+			);
+			name = SCLAlertView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -392,6 +424,7 @@
 				623016721B3B6B500025E726 /* OutgoingDetailViewController.swift in Sources */,
 				62BB8F081B5084AD00F3BDFC /* CFShareCircleView.m in Sources */,
 				6253CB0B1B5089D60060C742 /* CBViewController.swift in Sources */,
+				62E840131B538AD2004E4D4A /* TagManager.swift in Sources */,
 				623016701B3B6AD00025E726 /* OutgoingListViewController.swift in Sources */,
 				62A42F861B34D12A00A2E194 /* InfoViewController.swift in Sources */,
 				62BB8F0A1B5084AD00F3BDFC /* CFSharer.m in Sources */,
@@ -399,6 +432,7 @@
 				62D91D381B34E1B800316A01 /* OutgoingCell.swift in Sources */,
 				62D91D341B34D59F00316A01 /* AddViewController.swift in Sources */,
 				62C296001B35191000557764 /* SQLiteDB.swift in Sources */,
+				62E840101B538AC9004E4D4A /* TagView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,7 +442,9 @@
 			files = (
 				62A42F7C1B34CDFE00A2E194 /* __Tests.swift in Sources */,
 				62BB8F0B1B5084AD00F3BDFC /* CFSharer.m in Sources */,
+				62E840141B538AD2004E4D4A /* TagManager.swift in Sources */,
 				62BB8F091B5084AD00F3BDFC /* CFShareCircleView.m in Sources */,
+				62E840111B538AC9004E4D4A /* TagView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
