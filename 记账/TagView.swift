@@ -35,7 +35,7 @@ class TagView: UIView {
             self.tagView.frame = self.originFrame!
             var i:CGFloat = 10
             for btn in self.tags{
-                btn.frame = CGRectMake(10, i, 50, 20)
+                btn.frame = CGRectMake(10, i, 60, 20)
                 i += 30
             }
             }, completion: {
@@ -48,7 +48,7 @@ class TagView: UIView {
         UIView.transitionWithView(self.tagView, duration: 0.4, options: UIViewAnimationOptions.CurveLinear, animations: {
             self.tagView.frame = CGRectMake(0, 0, self.frame.width, 30)
             for btn in self.tags{
-                btn.frame = CGRectMake(10, 10, 50, 20)
+                btn.frame = CGRectMake(10, 10, 60, 20)
             }
             }, completion: {
             finished in self.isShowing = false
@@ -62,7 +62,7 @@ class TagView: UIView {
     init(point:CGPoint) {
         var height = CGFloat(tagManager.tags.count*30 + 10)
         
-        super.init(frame: CGRectMake(point.x, point.y, 70, height))
+        super.init(frame: CGRectMake(point.x, point.y, 80, height))
         self.userInteractionEnabled = true
 
         isShowing = false
@@ -73,7 +73,7 @@ class TagView: UIView {
         originFrame = CGRectMake(0, 0, self.frame.width, height)
 
         for tag in tagManager.tags {
-            let btn = UIButton(frame: CGRectMake(10, 10, 50, 20))
+            let btn = UIButton(frame: CGRectMake(10, 10, 60, 20))
             btn.layer.cornerRadius = 5
             btn.titleLabel?.font = UIFont.systemFontOfSize(15)
             btn.backgroundColor = UIColor(red: 1, green: 0.9, blue: 0.58, alpha: 1)

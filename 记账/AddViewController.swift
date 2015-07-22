@@ -19,6 +19,7 @@ class AddViewController: CBViewController, UITextFieldDelegate, TagViewDelegate 
     @IBOutlet var descTextfield: UITextField!
     @IBOutlet var nameTextfield: UITextField!
     
+    @IBOutlet var addBtn: UIButton!
     @IBOutlet var userLabel: UILabel!
     
     func showTagView(){
@@ -139,15 +140,14 @@ class AddViewController: CBViewController, UITextFieldDelegate, TagViewDelegate 
     }
     
     override func viewDidLoad() {
-        costTextfield.text = " "
-        descTextfield.text = " "
-        nameTextfield.text = " "
         
         nameTextfield.delegate = self
         descTextfield.delegate = self
         costTextfield.delegate = self
         
-        tagButton = UIButton(frame: CGRectMake(self.view.frame.width-100, 250, 70, 30))
+        addBtn.layer.cornerRadius = 3
+        
+        tagButton = UIButton(frame: CGRectMake(self.view.frame.width-80, 250, 80, 40))
         tagButton.setTitle("Tag", forState: UIControlState.Normal)
         tagButton.backgroundColor = UIColor.darkGrayColor()
         tagButton.addTarget(self, action: "showTagView", forControlEvents: UIControlEvents.TouchUpInside)
