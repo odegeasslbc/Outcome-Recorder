@@ -51,7 +51,7 @@
 }
 
 + (CFSharer *)twitter {
-    return [[CFSharer alloc] initWithName:@"Sync" imageName:@"sync.png"];
+    return [[CFSharer alloc] initWithName:@"Sync" imageName:@"list.png"];
 }
 
 @end
